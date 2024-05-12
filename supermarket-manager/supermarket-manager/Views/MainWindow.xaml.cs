@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using supermarket_manager.Views;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +20,18 @@ namespace supermarket_manager
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public void OnClick_Login(object sender, RoutedEventArgs e)
+        {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
+        }
+
+        public void OnClick_Exit(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
