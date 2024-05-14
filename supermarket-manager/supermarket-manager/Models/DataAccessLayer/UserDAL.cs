@@ -80,10 +80,23 @@ namespace supermarket_manager.Models.DataAccessLayer
                 SqlParameter paramUsername = new SqlParameter("@usr", user.Username);
                 SqlParameter paramPassword = new SqlParameter("@psw", user.Password);
                 SqlParameter paramRole = new SqlParameter("@role", user.Role);
-   
+
                 cmd.Parameters.Add(paramUsername);
                 cmd.Parameters.Add(paramPassword);
                 cmd.Parameters.Add(paramRole);
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void DeleteUser(User user)
+        {
+            using (SqlConnection con = DALHelper.Connection)
+            {
+                SqlCommand cmd = new SqlCommand("DeleteUser", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlParameter paramUswername = new SqlParameter("@usern", user.Username);
+                cmd.Parameters.Add(paramUswername);
                 con.Open();
                 cmd.ExecuteNonQuery();
             }
