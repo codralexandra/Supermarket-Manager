@@ -1,4 +1,5 @@
 ﻿using supermarket_manager.Models.EntityLayer;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -39,6 +40,52 @@ namespace supermarket_manager.Models.DataAccessLayer
             finally
             {
                 con.Close();
+            }
+        }
+
+        public ObservableCollection<User> GetAllUsers()
+        {
+            SqlConnection con = DALHelper.Connection;
+            try
+            {
+                SqlCommand cmd = new SqlCommand("GetAllUsers", con);
+                ObservableCollection<User> result = new ObservableCollection<User>();
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    result.Add(new User()
+                    {
+                        Username = reader["Username"].ToString(),
+                        Password = reader["Password"].ToString(),
+                        Role = reader["Role"].ToString()
+                    });
+                }
+                reader.Close();
+                return result;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void AddUser(User user)
+        {
+            using (SqlConnection con = DALHelper.Connection)
+            {
+                SqlCommand cmd = new SqlCommand("AddUser", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlParameter paramUsername = new SqlParameter("@usr", user.Username);
+                SqlParameter paramPassword = new SqlParameter("@psw", user.Password);
+                SqlParameter paramRole = new SqlParameter("@role", user.Role);
+   
+                cmd.Parameters.Add(paramUsername);
+                cmd.Parameters.Add(paramPassword);
+                cmd.Parameters.Add(paramRole);
+                con.Open();
+                cmd.ExecuteNonQuery();
             }
         }
     }

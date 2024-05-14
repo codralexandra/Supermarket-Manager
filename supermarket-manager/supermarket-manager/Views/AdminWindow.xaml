@@ -3,10 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ctx="clr-namespace:supermarket_manager.View_Models"
         xmlns:local="clr-namespace:supermarket_manager.Views"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="450" Width="800">
+        Title="AdminWindow" Height="300" Width="300">
+    <Window.DataContext>
+        <ctx:AdminWindowVM/>
+    </Window.DataContext>
     <Grid>
-        
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label FontSize="15" FontWeight="Bold">Add, Modify, Delete and View for:</Label>
+            <Button Margin="0,0,0,10" Width="100" Command="{Binding UserCommand}">Users</Button>
+            <Button Margin="0,0,0,10" Width="100">Categories</Button>
+            <Button Margin="0,0,0,10" Width="100">Products</Button>
+            <Button Margin="0,0,0,10" Width="100">Producers</Button>
+            <Button Margin="0,0,0,10" Width="100">Stocks</Button>
+        </StackPanel>
     </Grid>
 </Window>

@@ -4,20 +4,10 @@ namespace supermarket_manager.Models.EntityLayer
 {
     class User: BasePropertyChanged
     {
-        private string ?id;
         private string ?username;
         private string ?password;
         private string ?role;
-
-        public string? Id
-        {
-            get { return id; }
-            set
-            {
-                id = value;
-                NotifyPropertyChanged("Id");
-            }
-        }
+        private bool? valid;
 
         public string? Username
         {
@@ -46,6 +36,16 @@ namespace supermarket_manager.Models.EntityLayer
             {
                 role = value;
                 NotifyPropertyChanged("Role");
+            }
+        }
+
+        public bool? Valid
+        {
+            get { return valid; }
+            set
+            {
+                valid = value;
+                NotifyPropertyChanged("Valid");
             }
         }
     }
