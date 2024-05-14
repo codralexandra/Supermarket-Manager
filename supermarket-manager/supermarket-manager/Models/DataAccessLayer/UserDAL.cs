@@ -57,6 +57,7 @@ namespace supermarket_manager.Models.DataAccessLayer
                 {
                     result.Add(new User()
                     {
+                        Id = Convert.ToInt32(reader["Id"]),
                         Username = reader["Username"].ToString(),
                         Password = reader["Password"].ToString(),
                         Role = reader["Role"].ToString()
@@ -97,6 +98,26 @@ namespace supermarket_manager.Models.DataAccessLayer
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlParameter paramUswername = new SqlParameter("@usern", user.Username);
                 cmd.Parameters.Add(paramUswername);
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void ModifyUser(User user)
+        {
+            using (SqlConnection con = DALHelper.Connection)
+            {
+                SqlCommand cmd = new SqlCommand("ModifyUser", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlParameter paramID = new SqlParameter("@id", user.Id);
+                SqlParameter paramUsername = new SqlParameter("@usern", user.Username);
+                SqlParameter paramPassword = new SqlParameter("@psw", user.Password);
+                SqlParameter paramRole = new SqlParameter("@role", user.Role);
+                
+                cmd.Parameters.Add(paramID);
+                cmd.Parameters.Add(paramUsername);
+                cmd.Parameters.Add(paramPassword);
+                cmd.Parameters.Add(paramRole);
                 con.Open();
                 cmd.ExecuteNonQuery();
             }

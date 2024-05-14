@@ -4,11 +4,21 @@ namespace supermarket_manager.Models.EntityLayer
 {
     class User: BasePropertyChanged
     {
+        private int id;
         private string ?username;
         private string ?password;
         private string ?role;
         private bool? valid;
 
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                NotifyPropertyChanged("Id");
+            }
+        }
         public string? Username
         {
             get { return username; }

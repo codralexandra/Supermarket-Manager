@@ -55,6 +55,19 @@ namespace supermarket_manager.View_Models
                 return deleteCommand;
             }
         }
+
+        private ICommand updateCommand;
+        public ICommand UpdateCommand
+        {
+            get
+            {
+                if(updateCommand == null)
+                {
+                    updateCommand = new RelayCommand<User>(userBLL.ModifyUser);
+                }
+                return updateCommand;
+            }
+        }
         #endregion
     }
 }

@@ -86,5 +86,22 @@ namespace supermarket_manager.Models.BusinessLogicLayer
                 UsersList.Remove(user);
             }
         }
+
+        public void ModifyUser(User user)
+        {
+            if(user==null)
+            {
+                MessageBox.Show("You must select a user to modify.");
+            }
+            else if(user.Username=="" || user.Password=="" || user.Role=="")
+            {
+                MessageBox.Show("All fields are mandatory.");
+            }
+            else
+            {
+                userDAL.ModifyUser(user);
+                MessageBox.Show("User information updated successfully!");
+            }
+        }
     }
 }
