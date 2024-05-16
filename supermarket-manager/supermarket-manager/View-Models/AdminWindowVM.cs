@@ -10,16 +10,24 @@ namespace supermarket_manager.View_Models
     internal class AdminWindowVM
     {
         public ICommand UserCommand { get; }
+        public ICommand SuplierCommand { get; }
 
         public AdminWindowVM()
         {
             UserCommand = new RelayCommand<object>(UserPage);
+            SuplierCommand = new RelayCommand<object>(SuplierPage);
         }
 
         private void UserPage(object parameter)
         {
             UsersCRUD usersCRUd = new UsersCRUD();
             usersCRUd.Show();
+        }
+
+        private void SuplierPage(object parameter)
+        {
+            SupliersCRUD supliersCRUD = new SupliersCRUD();
+            supliersCRUD.Show();
         }
     }
 }

@@ -1,29 +1,23 @@
 ﻿using supermarket_manager.Models.BusinessLogicLayer;
+using supermarket_manager.Models.DataAccessLayer;
 using supermarket_manager.Models.EntityLayer;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using WpfMVVMAgendaCommands.Models;
 using WpfMVVMAgendaCommands.ViewModels;
 
 namespace supermarket_manager.View_Models
 {
-    class UsersCRUDVM : BasePropertyChanged
+    class SupliersCRUDVM
     {
-        UserBLL userBLL = new UserBLL();
-        public List<string> Roles { get; set; }
-        public ObservableCollection<User> UsersList
+        SuplierBLL suplierBLL = new SuplierBLL();
+        public ObservableCollection<Suplier> SuplierList
         {
-            get => userBLL.UsersList;
-            set => userBLL.UsersList = value;
+            get => suplierBLL.SuplierList;
+            set => suplierBLL.SuplierList = value;
         }
-        public UsersCRUDVM()
+        public SupliersCRUDVM()
         {
-            UsersList = userBLL.GetAllUsers();
-            Roles = new List<string>
-            {
-                "Admin",
-                "Cashier"
-            };
+            SuplierList = suplierBLL.GetAllSupliers();
         }
 
         #region Commands
@@ -35,7 +29,7 @@ namespace supermarket_manager.View_Models
             {
                 if (addCommand == null)
                 {
-                    addCommand = new RelayCommand<User>(userBLL.AddUser);
+                    addCommand = new RelayCommand<Suplier>(suplierBLL.AddSuplier);
                 }
                 return addCommand;
             }
@@ -46,9 +40,9 @@ namespace supermarket_manager.View_Models
         {
             get
             {
-                if(deleteCommand == null)
+                if (deleteCommand == null)
                 {
-                    deleteCommand = new RelayCommand<User>(userBLL.DeleteUser);
+                    deleteCommand = new RelayCommand<Suplier>(suplierBLL.DeleteSuplier);
                 }
                 return deleteCommand;
             }
@@ -59,9 +53,9 @@ namespace supermarket_manager.View_Models
         {
             get
             {
-                if(updateCommand == null)
+                if (updateCommand == null)
                 {
-                    updateCommand = new RelayCommand<User>(userBLL.ModifyUser);
+                    updateCommand = new RelayCommand<Suplier>(suplierBLL.ModifySuplier);
                 }
                 return updateCommand;
             }

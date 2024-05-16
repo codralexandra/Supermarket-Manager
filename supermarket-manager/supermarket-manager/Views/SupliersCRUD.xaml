@@ -1,0 +1,56 @@
+﻿<Window x:Class="supermarket_manager.Views.SupliersCRUD"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ctx="clr-namespace:supermarket_manager.View_Models"
+        xmlns:convert="clr-namespace:supermarket_manager.Converters"
+        xmlns:local="clr-namespace:supermarket_manager.Views"
+        mc:Ignorable="d"
+        Title="SupliersCRUD" Height="450" Width="800">
+    <Window.DataContext>
+        <ctx:SupliersCRUDVM/>
+    </Window.DataContext>
+    <Grid>
+        <WrapPanel Margin="10" HorizontalAlignment="Center">
+            <StackPanel>
+                <StackPanel.Resources>
+                    <convert:SuplierConvert x:Key="suplierConvert"/>
+                </StackPanel.Resources>
+                <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <Button Width="100" Margin="0,0,10,0" Command="{Binding AddCommand}">Add
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource suplierConvert}">
+                                <Binding ElementName="txtName" Path="Text"/>
+                                <Binding ElementName="txtCountry" Path="Text"/>
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button Content="Modify" Width="100" Margin="0,0,10,0" Command="{Binding UpdateCommand}"
+                            CommandParameter="{Binding ElementName=supliersGrid, Path=SelectedItem}"/>
+                    <Button Content="Delete" Width="100" Margin="0,0,10,0" Command="{Binding DeleteCommand}"
+                    CommandParameter="{Binding ElementName=supliersGrid, Path=SelectedItem}"/>
+                    <Button Width="100">Search</Button>
+                </WrapPanel>
+                <WrapPanel Margin="0,0,0,10" HorizontalAlignment="Center">
+                    <Label FontWeight="Bold">Name:</Label>
+                    <TextBox Name="txtName" Width="200" Text ="{Binding ElementName=supliersGrid, 
+                Path=SelectedItem.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                </WrapPanel>
+                <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <Label FontWeight="Bold">Country:</Label>
+                    <TextBox Name="txtCountry" Width="200" Margin="4,0,0,0" Text ="{Binding ElementName=supliersGrid, 
+                Path=SelectedItem.Country, UpdateSourceTrigger=PropertyChanged}"/>
+                </WrapPanel>
+                <DataGrid Name="supliersGrid" AutoGenerateColumns="False" Margin="0,15,0,0" Height="250" Width="400"
+ItemsSource="{Binding SuplierList}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="200"/>
+                        <DataGridTextColumn Header="Country" Binding="{Binding Country}" Width="200"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </WrapPanel>
+    </Grid>
+</Window>
