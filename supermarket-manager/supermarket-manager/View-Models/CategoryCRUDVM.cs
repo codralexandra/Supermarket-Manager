@@ -6,21 +6,22 @@ using WpfMVVMAgendaCommands.ViewModels;
 
 namespace supermarket_manager.View_Models
 {
-    class SupliersCRUDVM
+    class CategoryCRUDVM
     {
-        SuplierBLL suplierBLL = new SuplierBLL();
-        public ObservableCollection<Suplier> SuplierList
+       // public ObservableCollection<Category> Categories { get; set; }
+        CategoryBLL categoryBLL = new CategoryBLL();
+
+        public ObservableCollection<Category> Categories
         {
-            get => suplierBLL.SuplierList;
-            set => suplierBLL.SuplierList = value;
+            get => categoryBLL.CategoryList;
+            set => categoryBLL.CategoryList = value;
         }
-        public SupliersCRUDVM()
+        public CategoryCRUDVM()
         {
-            SuplierList = suplierBLL.GetAllSupliers();
+            Categories = categoryBLL.GetAllCategories();
         }
 
         #region Commands
-
         private ICommand addCommand;
         public ICommand AddCommand
         {
@@ -28,7 +29,7 @@ namespace supermarket_manager.View_Models
             {
                 if (addCommand == null)
                 {
-                    addCommand = new RelayCommand<Suplier>(suplierBLL.AddSuplier);
+                    addCommand = new RelayCommand<Category>(categoryBLL.AddCategory);
                 }
                 return addCommand;
             }
@@ -41,7 +42,7 @@ namespace supermarket_manager.View_Models
             {
                 if (deleteCommand == null)
                 {
-                    deleteCommand = new RelayCommand<Suplier>(suplierBLL.DeleteSuplier);
+                    deleteCommand = new RelayCommand<Category>(categoryBLL.DeleteCategory);
                 }
                 return deleteCommand;
             }
@@ -54,7 +55,7 @@ namespace supermarket_manager.View_Models
             {
                 if (updateCommand == null)
                 {
-                    updateCommand = new RelayCommand<Suplier>(suplierBLL.ModifySuplier);
+                    updateCommand = new RelayCommand<Category>(categoryBLL.UpdateCategory);
                 }
                 return updateCommand;
             }

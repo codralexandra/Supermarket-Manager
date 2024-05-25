@@ -1,6 +1,5 @@
 ﻿using supermarket_manager.Models.DataAccessLayer;
 using System.Collections.ObjectModel;
-using System;
 using supermarket_manager.Models.EntityLayer;
 using System.Windows;
 

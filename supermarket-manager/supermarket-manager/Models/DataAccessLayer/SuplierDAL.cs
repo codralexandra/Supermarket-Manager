@@ -1,12 +1,7 @@
 ﻿using supermarket_manager.Models.EntityLayer;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace supermarket_manager.Models.DataAccessLayer
 {
@@ -59,6 +54,32 @@ namespace supermarket_manager.Models.DataAccessLayer
                 }
                 reader.Close();
                return queryResult;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public string GetSuplierName(string id)
+        {
+            SqlConnection con = DALHelper.Connection;
+            try
+            {
+                SqlCommand cmd = new SqlCommand("GetSuplierName", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new SqlParameter("@id", id));
+
+                string queryResult = null;
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    queryResult = reader["Name"].ToString();
+                }
+                reader.Close();
+                return queryResult;
             }
             finally
             {

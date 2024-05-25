@@ -15,9 +15,9 @@
             <Label FontSize="15" FontWeight="Bold">Add, Modify, Delete and View for:</Label>
             <Button Margin="0,0,0,10" Width="100" Command="{Binding UserCommand}">Users</Button>
             <Button Margin="0,0,0,10" Width="100" Command="{Binding SuplierCommand}">Supliers</Button>
-            <Button Margin="0,0,0,10" Width="100">Categories</Button>
-            <Button Margin="0,0,0,10" Width="100">Products</Button>
-            <Button Margin="0,0,0,10" Width="100">Stocks</Button>
+            <Button Margin="0,0,0,10" Width="100" Command="{Binding ProductCommand}">Products</Button>
+            <Button Margin="0,0,0,10" Width="100" Command="{Binding CategoryCommand}">Categories</Button>
+            <Button Margin="0,0,0,10" Width="100" Command="{Binding StockCommand}">Stocks</Button>
         </StackPanel>
     </Grid>
 </Window>

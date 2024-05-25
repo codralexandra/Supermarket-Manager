@@ -1,6 +1,5 @@
 ﻿using supermarket_manager.Models;
 using supermarket_manager.Models.BusinessLogicLayer;
-using supermarket_manager.Models.EntityLayer;
 using supermarket_manager.Views;
 using System.Windows;
 using System.Windows.Input;

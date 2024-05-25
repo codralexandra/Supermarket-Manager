@@ -6,21 +6,26 @@ using WpfMVVMAgendaCommands.ViewModels;
 
 namespace supermarket_manager.View_Models
 {
-    class SupliersCRUDVM
+    class ProductsCRUDVM
     {
-        SuplierBLL suplierBLL = new SuplierBLL();
-        public ObservableCollection<Suplier> SuplierList
+        ProductBLL productBLL = new ProductBLL();
+        CategoryBLL categoryBLL = new CategoryBLL();
+        public ObservableCollection<Product> ProducList
         {
-            get => suplierBLL.SuplierList;
-            set => suplierBLL.SuplierList = value;
+            get => productBLL.ProductList;
+            set => productBLL.ProductList = value;
         }
-        public SupliersCRUDVM()
+        public ObservableCollection<Category> Categories
         {
-            SuplierList = suplierBLL.GetAllSupliers();
+            get => categoryBLL.CategoryList;
+            set => categoryBLL.CategoryList = value;
+        }
+        public ProductsCRUDVM()
+        {
+            ProducList = productBLL.GetAllProducts();
         }
 
         #region Commands
-
         private ICommand addCommand;
         public ICommand AddCommand
         {
@@ -28,7 +33,7 @@ namespace supermarket_manager.View_Models
             {
                 if (addCommand == null)
                 {
-                    addCommand = new RelayCommand<Suplier>(suplierBLL.AddSuplier);
+                    addCommand = new RelayCommand<Product>(productBLL.AddProduct);
                 }
                 return addCommand;
             }
@@ -41,7 +46,7 @@ namespace supermarket_manager.View_Models
             {
                 if (deleteCommand == null)
                 {
-                    deleteCommand = new RelayCommand<Suplier>(suplierBLL.DeleteSuplier);
+                    deleteCommand = new RelayCommand<Product>(productBLL.DeleteProduct);
                 }
                 return deleteCommand;
             }
@@ -54,7 +59,7 @@ namespace supermarket_manager.View_Models
             {
                 if (updateCommand == null)
                 {
-                    updateCommand = new RelayCommand<Suplier>(suplierBLL.ModifySuplier);
+                    updateCommand = new RelayCommand<Product>(productBLL.ModifyProduct);
                 }
                 return updateCommand;
             }
