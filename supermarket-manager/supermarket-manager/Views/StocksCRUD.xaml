@@ -3,10 +3,78 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:convert="clr-namespace:supermarket_manager.Converters"
+        xmlns:ctx="clr-namespace:supermarket_manager.View_Models"
         xmlns:local="clr-namespace:supermarket_manager.Views"
         mc:Ignorable="d"
-        Title="StocksCRUD" Height="450" Width="800">
+        Title="StocksCRUD" Height="600" Width="700">
+    <Window.DataContext>
+        <ctx:StocksCRUDVM/>
+    </Window.DataContext>
     <Grid>
-        
+        <Grid>
+            <WrapPanel Margin="10" HorizontalAlignment="Center">
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <convert:StockConvert x:Key="stockConvert"/>
+                    </StackPanel.Resources>
+                    <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
+                        <Label FontWeight="Bold">Product:</Label>
+                        <ComboBox Name="txtProduct" Width="200" 
+                                    ItemsSource="{Binding Products}" 
+                                    SelectedItem="{Binding ElementName=stocksGrid, 
+                                                           Path=SelectedItem.Product, 
+                                                           UpdateSourceTrigger=PropertyChanged}"/>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
+                        <Label FontWeight="Bold">Quantity:</Label>
+                        <TextBox Name="txtQuantity" Width="150" Text ="{Binding ElementName=stocksGrid, 
+Path=SelectedItem.Quantity, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
+                        <Label FontWeight="Bold">Acq. Date:</Label>
+                        <DatePicker Name="txtAcqDate" Width="150" SelectedDate="{Binding AcqDate, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
+                        <Label FontWeight="Bold">Acq. Price:</Label>
+                        <TextBox Name="txtAcqPrice" Width="150" Text="{Binding AcqPrice,Mode=TwoWay, StringFormat=N2,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
+                        <Label FontWeight="Bold">Sell Price:</Label>
+                        <TextBox Name="txtSellPrice" Width="150" Text="{Binding SellPrice, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"></TextBox>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
+                        <Label FontWeight="Bold">Unit:</Label>
+                        <ComboBox Name="txtUnit" Width="100" ItemsSource="{Binding Units}"
+        SelectedValue="{Binding SelectedItem.Unit, ElementName=stocksGrid, Mode=TwoWay}"></ComboBox>
+                    </WrapPanel>
+                    <Button Width="100" Margin="0,0,10,0" Command="{Binding AddCommand}">Add Stock
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource stockConvert}">
+                                <Binding ElementName="txtProduct" Path="Text"/>
+                                <Binding ElementName="txtQuantity" Path="Text"/>
+                                <Binding ElementName="txtAcqDate" Path="Text"/>
+                                <Binding ElementName="txtAcqPrice" Path="Text"/>
+                                <Binding ElementName="txtSellPrice" Path="Text"/>
+                                <Binding ElementName="txtUnit" Path="Text"/>
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                    <DataGrid Name="stocksGrid" AutoGenerateColumns="False" Margin="0,15,0,0" Height="250" Width="600"
+ItemsSource="{Binding StockList}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Product" Binding="{Binding Product}" Width="150"/>
+                            <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="50"/>
+                            <DataGridTextColumn Header="Unit" Binding="{Binding Unit}" Width="70"/>
+                            <DataGridTextColumn Header="Acq_Date" Binding="{Binding Acq_Date}" Width="80"/>
+                            <DataGridTextColumn Header="Acq. Price" Binding="{Binding Acq_Price}" Width="80"/>
+                            <DataGridTextColumn Header="Sell Price" Binding="{Binding Sell_Price}" Width="80"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </WrapPanel>
+        </Grid>
     </Grid>
 </Window>

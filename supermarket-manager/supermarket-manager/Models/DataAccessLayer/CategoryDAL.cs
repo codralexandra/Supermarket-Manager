@@ -83,7 +83,7 @@ namespace supermarket_manager.Models.DataAccessLayer
             }
         }
 
-        public string GetCategoryName(Category category)
+        public string GetCategoryName(int id)
         {
             SqlConnection con = DALHelper.Connection;
             try
@@ -91,7 +91,7 @@ namespace supermarket_manager.Models.DataAccessLayer
                 SqlCommand cmd = new SqlCommand("GetCategoryName", con);
                 string? result = null;
                 cmd.CommandType = CommandType.StoredProcedure;
-                SqlParameter idParam = new SqlParameter("id",category.Id);
+                SqlParameter idParam = new SqlParameter("id",id);
                 cmd.Parameters.Add(idParam);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -103,6 +103,31 @@ namespace supermarket_manager.Models.DataAccessLayer
                 if (result != null)
                     return result;
                 else return "None";
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public int GetCategoryID(string name)
+        {
+            SqlConnection con = DALHelper.Connection;
+            try
+            {
+                SqlCommand cmd = new SqlCommand("GetCategoryID", con);
+                int result = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlParameter nameParam = new SqlParameter("name", name);
+                cmd.Parameters.Add(nameParam);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    result = Convert.ToInt32(reader["Id"]);
+                }
+                reader.Close();
+                return result;
             }
             finally
             {

@@ -10,19 +10,27 @@ namespace supermarket_manager.View_Models
     {
         ProductBLL productBLL = new ProductBLL();
         CategoryBLL categoryBLL = new CategoryBLL();
+        SuplierBLL suplierBLL = new SuplierBLL();
         public ObservableCollection<Product> ProducList
         {
             get => productBLL.ProductList;
             set => productBLL.ProductList = value;
         }
-        public ObservableCollection<Category> Categories
-        {
-            get => categoryBLL.CategoryList;
-            set => categoryBLL.CategoryList = value;
-        }
+        public ObservableCollection<string> Categories { get; set; }
+        public ObservableCollection<string> Supliers { get; set; }
         public ProductsCRUDVM()
         {
             ProducList = productBLL.GetAllProducts();
+            Categories = new ObservableCollection<string>();
+            Supliers = new ObservableCollection<string>();
+            foreach(Category category in categoryBLL.GetAllCategories())
+            {
+                Categories.Add(categoryBLL.GetCategoryName(category.Id));
+            }
+            foreach(Suplier suplier in suplierBLL.GetAllSupliers())
+            {
+                Supliers.Add(suplierBLL.GetSuplierName(suplier.Id));
+            }
         }
 
         #region Commands

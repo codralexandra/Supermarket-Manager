@@ -39,24 +39,29 @@
                 Path=SelectedItem.Name, UpdateSourceTrigger=PropertyChanged}"/>
                 </WrapPanel>
                 <WrapPanel Margin="0,0,0,10" HorizontalAlignment="Center">
-                    <Label FontWeight="Bold">Suplier ID:</Label>
-                    <TextBox Name="txtSuplier" Width="200" Text ="{Binding ElementName=productsGrid, 
-Path=SelectedItem.SuplierId, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label FontWeight="Bold">Suplier:</Label>
+                    <ComboBox Name="txtSuplier" Width="200" 
+              ItemsSource="{Binding Supliers}" 
+              SelectedItem="{Binding ElementName=productsGrid, 
+                            Path=SelectedItem.SuplierName, 
+                            UpdateSourceTrigger=PropertyChanged}"/>
                 </WrapPanel>
                 <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
-                    <Label FontWeight="Bold">Category ID:</Label>
-                    <TextBox Name="txtCategory" Width="200" Text ="{Binding ElementName=productsGrid, 
-Path=SelectedItem.CategoryId, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label FontWeight="Bold">Category:</Label>
+                    <ComboBox Name="txtCategory" Width="200" 
+              ItemsSource="{Binding Categories}" 
+              SelectedItem="{Binding ElementName=productsGrid, 
+                            Path=SelectedItem.CategoryName, 
+                            UpdateSourceTrigger=PropertyChanged}"/>
                 </WrapPanel>
                 <DataGrid Name="productsGrid" AutoGenerateColumns="False" Margin="0,15,0,0" Height="250" Width="700"
 ItemsSource="{Binding ProducList}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="100"/>
-                        <DataGridTextColumn Header="Category ID" Binding="{Binding CategoryId}" Width="200"/>
+                        <DataGridTextColumn Header="Category" Binding="{Binding CategoryName}" Width="200"/>
                         <DataGridTextColumn Header="Bar Code" Binding="{Binding BarCode}" Width="90"></DataGridTextColumn>
                         <DataGridTextColumn Header="Exp Date" Binding="{Binding ExpDate}" Width="90"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Suplier ID" Binding="{Binding SuplierId}" Width="150"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Suplier" Binding="{Binding SuplierName}" Width="150"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

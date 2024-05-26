@@ -15,7 +15,7 @@ namespace supermarket_manager.Models.BusinessLogicLayer
         }
         public void AddProduct(Product product)
         {
-            if (product == null || product.Name == "" || product.CategoryId == 0)
+            if (product == null || product.Name == null || product.CategoryId == 0 || product.SuplierId == 0)
             {
                 MessageBox.Show("All fields are mandatory.");
             }
@@ -54,6 +54,40 @@ namespace supermarket_manager.Models.BusinessLogicLayer
                 productDAL.ModifyProduct(product);
                 MessageBox.Show("Product information updated successfully!");
             }
+        }
+
+        public string GetProductName(int id)
+        {
+            return productDAL.GetProductName(id);
+        }
+
+        public int GetProductId(string name)
+        {
+            return productDAL.GetProductId(name);
+        }
+
+        public Product GetProductByName(string name)
+        {
+            return productDAL.GetProductByName(name);
+        }
+
+        public ObservableCollection<Product> GetProductByBarCode(string bar_code)
+        {
+            return productDAL.GetProductByBarCode(bar_code);
+        }
+
+        public ObservableCollection<Product> GetProductByExpDate(DateOnly exp_date)
+        {
+            return productDAL.GetProductByExpDate(exp_date);
+        }
+
+        public ObservableCollection<Product> GetProductBySuplier(int suplier)
+        {
+            return productDAL.GetProductBySuplier(suplier);
+        }
+        public ObservableCollection<Product> GetProductByCategory(int category)
+        {
+            return productDAL.GetProductByCategory(category);
         }
     }
 }

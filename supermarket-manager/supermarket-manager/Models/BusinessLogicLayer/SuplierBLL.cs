@@ -61,5 +61,15 @@ namespace supermarket_manager.Models.BusinessLogicLayer
                 MessageBox.Show("Suplier information updated successfully!");
             }
         }
+
+        public string GetSuplierName(int id)
+        {
+            return suplierDAL.GetSuplierName(id);
+        }
+
+        public int GetSuplierID(string name)
+        {
+            return suplierDAL.GetSuplierID(name);
+        }
     }
 }

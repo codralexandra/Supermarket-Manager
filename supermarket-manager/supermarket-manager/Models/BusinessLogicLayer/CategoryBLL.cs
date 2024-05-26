@@ -22,7 +22,7 @@ namespace supermarket_manager.Models.BusinessLogicLayer
             {
                 MessageBox.Show("All fields are mandatory.");
             }
-            else if(categoryDAL.CheckCategory(category)!=0)
+            else if (categoryDAL.CheckCategory(category) != 0)
             {
                 MessageBox.Show("Category already exists!");
             }
@@ -35,13 +35,13 @@ namespace supermarket_manager.Models.BusinessLogicLayer
 
         public void UpdateCategory(Category category)
         {
-            if(category!=null && category.Name == categoryDAL.GetCategoryName(category))
+            if (category != null && category.Name == categoryDAL.GetCategoryName(category.Id))
             {
                 MessageBox.Show("In order to update you must select a new name.");
             }
-            else if(category!=null && category.Name !=null)
+            else if (category != null && category.Name != null)
             {
-               categoryDAL.ModifyCategory(category);
+                categoryDAL.ModifyCategory(category);
             }
             else
             {
@@ -51,11 +51,11 @@ namespace supermarket_manager.Models.BusinessLogicLayer
 
         public void DeleteCategory(Category category)
         {
-            if(category!=null && joinDAL.GetProductsByCategory(category).Count()!=0)
+            if (category != null && joinDAL.GetProductsByCategory(category).Count() != 0)
             {
                 MessageBox.Show("You can't delete this category because there are products registered under it!");
             }
-            else if(category==null)
+            else if (category == null)
             {
                 MessageBox.Show("Must select a category in order to delete.");
             }
@@ -64,6 +64,15 @@ namespace supermarket_manager.Models.BusinessLogicLayer
                 categoryDAL.DeleteCategory(category);
                 CategoryList.Remove(category);
             }
+        }
+        public string GetCategoryName(int id)
+        {
+            return categoryDAL.GetCategoryName(id);
+        }
+
+        public int GetCategoryID(string name)
+        {
+            return categoryDAL.GetCategoryID(name);
         }
     }
 }

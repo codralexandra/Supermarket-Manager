@@ -35,10 +35,9 @@
                     <TextBox Name="txtName" Width="150" Text ="{Binding ElementName=categoryGrid, 
 Path=SelectedItem.Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 </WrapPanel>
-                <DataGrid Name="categoryGrid" AutoGenerateColumns="False" Margin="0,15,0,0" Height="250" Width="350"
+                <DataGrid Name="categoryGrid" AutoGenerateColumns="False" Margin="0,15,0,0" Height="250" Width="250"
 ItemsSource="{Binding Categories}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="250"/>
                     </DataGrid.Columns>
                 </DataGrid>

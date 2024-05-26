@@ -61,16 +61,14 @@ namespace supermarket_manager.Models.DataAccessLayer
             }
         }
 
-        public string GetSuplierName(string id)
+        public string GetSuplierName(int id)
         {
             SqlConnection con = DALHelper.Connection;
             try
             {
                 SqlCommand cmd = new SqlCommand("GetSuplierName", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-
                 cmd.Parameters.Add(new SqlParameter("@id", id));
-
                 string queryResult = null;
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
