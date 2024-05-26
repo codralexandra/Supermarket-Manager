@@ -15,24 +15,15 @@ namespace supermarket_manager.Models.BusinessLogicLayer
         {
             return stockDAL.GetAllStocks();
         }
-
-        private string generateBarCode()
-        {
-            Random res = new Random();
-            string result = "";
-            for (int i = 0; i < 3; i++)
-            {
-                int symbol = res.Next(26);
-                result = result + BarCodeSymbols[symbol];
-            }
-            return result;
-        }
-
         public void AddStock(Stock stock)
         {
             if (stock == null || stock.Product== null || stock.Quantity == 0 || stock.Unit == null || stock.Acq_Date == DateOnly.MinValue || stock.Acq_Price == 0)
             {
                 MessageBox.Show("All fields are mandatory");
+            }
+            else if(stock.Sell_Price < stock.Acq_Price)
+            {
+                MessageBox.Show("Selling price can't be smaller than acquisition price!");
             }
             else
             {

@@ -43,7 +43,7 @@ Path=SelectedItem.Quantity, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                     </WrapPanel>
                     <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
                         <Label FontWeight="Bold">Sell Price:</Label>
-                        <TextBox Name="txtSellPrice" Width="150" Text="{Binding SellPrice, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"></TextBox>
+                        <TextBox Name="txtSellPrice" Width="150" Text="{Binding SellPrice, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                     </WrapPanel>
                     <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
                         <Label FontWeight="Bold">Unit:</Label>
